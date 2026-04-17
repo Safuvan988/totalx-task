@@ -121,15 +121,13 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
         child: Scaffold(
           backgroundColor: AppColors.surface,
           body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight,
-                  ),
-                  child: Column(
+            child: CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  sliver: SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -318,8 +316,8 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                   ],
                 ),
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     ));
