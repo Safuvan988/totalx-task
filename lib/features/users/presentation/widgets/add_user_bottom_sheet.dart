@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -202,8 +203,15 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
                 TextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
+                  maxLength: 10,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                  ],
                   validator: validatePhone,
-                  decoration: _inputDecoration('9876543210'),
+                  decoration: _inputDecoration('9876543210').copyWith(
+                    counterText: '', // hide the built-in counter
+                  ),
                 ),
                 const SizedBox(height: 16),
 
