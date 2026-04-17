@@ -208,6 +208,36 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                         ),
                       ),
                       const SizedBox(height: 16),
+                      // ── Dev-mode hint ───────────────────────────────────
+                      if (AppConstants.useMockOtp)
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(bottom: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFF3CD),
+                            border: Border.all(color: const Color(0xFFFFCA28)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.info_outline,
+                                  size: 18, color: Color(0xFFB45309)),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Mock mode — use OTP: ${AppConstants.mockOtp}',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    color: const Color(0xFF92400E),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       // Timer
                       Center(
                         child: Text(
