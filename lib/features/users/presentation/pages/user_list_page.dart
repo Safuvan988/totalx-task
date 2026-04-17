@@ -21,9 +21,6 @@ class _UserListPageState extends State<UserListPage> {
   final _searchController = TextEditingController();
   final _scrollController = ScrollController();
 
-  // 300 ms debounce for search
-  int _debounceMs = 0;
-
   @override
   void initState() {
     super.initState();
@@ -43,14 +40,14 @@ class _UserListPageState extends State<UserListPage> {
     }
   }
 
+  int _lastSearchTime = 0;
+
   void _onSearchChanged(String query) {
     final now = DateTime.now().millisecondsSinceEpoch;
-    _debounceMs = now;
+    _lastSearchTime = now;
     Future.delayed(const Duration(milliseconds: 300), () {
-      if (DateTime.now().millisecondsSinceEpoch - now >= 290) {
-        if (mounted) {
-          context.read<UserBloc>().add(SearchUsersEvent(query));
-        }
+      if (_lastSearchTime == now && mounted) {
+        context.read<UserBloc>().add(SearchUsersEvent(query));
       }
     });
   }
@@ -258,12 +255,10 @@ class _UserListPageState extends State<UserListPage> {
         }
 
         List<UserEntity> users = [];
-        bool hasMore = false;
         bool isLoadingMore = false;
 
         if (state is UserLoaded) {
           users = state.users;
-          hasMore = state.hasMore;
         } else if (state is UserLoadingMore) {
           users = state.currentUsers;
           isLoadingMore = true;

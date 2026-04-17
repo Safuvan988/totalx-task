@@ -323,7 +323,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
   Widget _buildKeyRow(List<String> keys) {
     return Row(
       children: keys.map((key) {
-        if (key.isEmpty) return Expanded(child: const SizedBox());
+        if (key.isEmpty) return const Expanded(child: SizedBox());
         return Expanded(
           child: _KeypadButton(
             label: key,
