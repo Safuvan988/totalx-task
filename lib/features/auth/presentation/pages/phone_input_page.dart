@@ -127,11 +127,6 @@ class _PhoneInputPageState extends State<PhoneInputPage> {
                               color: AppColors.textHint,
                               fontSize: 14,
                             ),
-                            suffixIcon: const Icon(
-                              Icons.circle,
-                              color: AppColors.error,
-                              size: 10,
-                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
